@@ -8,39 +8,18 @@ from flask import redirect
 from flask import session
 
 
-# app=Flask(__name__,template_folder="templates",static_folder="static",static_url_path="static")
 app=Flask(__name__,template_folder="templates",static_folder="static")
-app.secret_key="eds3dsggd"
 
 
-@app.route("/login",methods=["GET","POST"])
-def login():
-    if request.method=="GET":
-        # return "Login"
-        return render_template("login.html")
+# flask 中所有的默认配置文件
+print(app.config)
 
-    # get 传递请求
-    # request.args
-
-    # post 传递请求
-    user=request.form.get("user")
-    pwd=request.form.get("pwd")
-
-    if user=="xws" and pwd =="123":
-        session["user"]=user
-        return redirect("/index")
-
-    return render_template("login.html",error="用户名或密码错误")
-    # return render_template("login.html",**{"error":"用户名或密码错误"})
+# app.config["DEBUG"]=True
+app.config.from_object("settings.DevelopmentConfig")
 
 
-@app.route("/index")
-def index():
-    user=session.get("user")
-    print(user)
-    if not user:
-        return redirect("/index")
-    return render_template("/index.html")
+
+
 
 
 if __name__ == '__main__':
