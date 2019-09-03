@@ -6,6 +6,7 @@
 class Config(object):
     DEBUG = False
     TESTING = False
+    SECRET_KEY = "asdasfsdf"
     DATABASE_URI = 'sqlite://:memory:'
 
 
